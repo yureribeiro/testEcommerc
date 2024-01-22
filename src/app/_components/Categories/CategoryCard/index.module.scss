@@ -1,0 +1,34 @@
+@use '../../../_css/queries.scss' as *;
+
+.card {
+  position: relative;
+  background-color: var(--color-dark-50);
+  min-height: 360px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: .5rem;
+  cursor: pointer;
+  border: none;
+  border-radius: .4rem;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-decoration: none;
+  font-weight: bold;
+  transition: .4s;
+} .card:hover {
+  scale: 1.02;
+}
+
+.title {
+  border: none;
+  border-radius: .4rem;
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  background-color: transparent;
+}
+
