@@ -3,7 +3,7 @@
 import { createContext, SetStateAction, useContext, useState } from 'react'
 
 interface IContextType {
-  categoryFilters: string[]
+  categoryFilters: number[]
   setCategoryFilters: React.Dispatch<SetStateAction<number[]>>
   sort: string
   setSort: React.Dispatch<SetStateAction<string>>

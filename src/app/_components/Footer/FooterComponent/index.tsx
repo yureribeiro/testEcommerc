@@ -12,12 +12,13 @@ import styles from './index.module.scss'
 const FooterComponent = ({ footer }: { footer: Footer }) => {
   const pathname = usePathname()
   const navItems = footer?.navItems || []
+
   return (
     <footer className={noHeaderFooterUrls.includes(pathname) ? styles.hide : ''}>
       <Gutter>
         <ul className={styles.inclusions}>
-          {inclusions.map((inclusion, index) => (
-            <li key={inclusion.title}>
+          {inclusions.map((inclusion) => (
+            <li key={inclusion.title}  className={styles.contentInclusion}>
               <Image src={inclusion.icon} alt={inclusion.title} width={36} height={36} className={styles.icon} />
               <h5 className={styles.title}>{inclusion.title}</h5>
               <p className={styles.description}>{inclusion.description}</p>
@@ -32,8 +33,8 @@ const FooterComponent = ({ footer }: { footer: Footer }) => {
             <Link href='/'>
               <Image src='/logo-white.svg' alt="logo" className={styles.logo} width={170} height={50} />
             </Link>
+            <p>{footer.copyright}</p>
           </div>
-          <p>{footer.copyright}</p>
 
           <div className={styles.socialLinks}>
             {navItems.map((item) => {

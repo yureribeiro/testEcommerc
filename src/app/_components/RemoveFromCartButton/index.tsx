@@ -16,7 +16,7 @@ export const RemoveFromCartButton: React.FC<{
   const productIsInCart = isProductInCart(product)
 
   if (!productIsInCart) {
-    return <div>Item is not in the cart</div>
+    return <div>Item não está no carrinho</div>
   }
 
   return (
@@ -27,7 +27,7 @@ export const RemoveFromCartButton: React.FC<{
       }}
       className={[className, classes.removeFromCartButton].filter(Boolean).join(' ')}
     >
-      Remove
+      Remover
     </button>
   )
 }

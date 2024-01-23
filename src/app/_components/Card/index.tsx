@@ -1,7 +1,7 @@
 'use client'
 
-import React, { Fragment, useEffect, useState } from 'react'
 import Link from 'next/link'
+import React, { useEffect, useState } from 'react'
 
 import { Product } from '../../../payload/payload-types'
 import { Media } from '../Media'
@@ -11,19 +11,19 @@ import classes from './index.module.scss'
 
 const priceFromJSON = (priceJSON): string => {
   let price = ''
+  console.log('priceJSON: ', priceJSON, "type:" + typeof priceJSON)
 
   if (priceJSON) {
     try {
       const parsed = JSON.parse(priceJSON)?.data[0]
       const priceValue = parsed.unit_amount
       const priceType = parsed.type
-      price = `${parsed.currency === 'usd' ? '$' : ''}${(priceValue / 100).toFixed(2)}`
+      price = `R$ ${(priceValue / 100).toFixed(2)}`
       if (priceType === 'recurring') {
-        price += `/${
-          parsed.recurring.interval_count > 1
-            ? `${parsed.recurring.interval_count} ${parsed.recurring.interval}`
-            : parsed.recurring.interval
-        }`
+        price += `/${parsed.recurring.interval_count > 1
+          ? `${parsed.recurring.interval_count} ${parsed.recurring.interval}`
+          : parsed.recurring.interval
+          }`
       }
     } catch (e) {
       console.error(`Cannot parse priceJSON`) // eslint-disable-line no-console
@@ -51,7 +51,7 @@ export const Card: React.FC<{
   } = props
 
   const { description, image: metaImage } = meta || {}
-
+  console.log(description)
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
   const titleToUse = titleFromProps || title
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
@@ -67,47 +67,16 @@ export const Card: React.FC<{
   }, [priceJSON])
 
   return (
-    <div className={[classes.card, className].filter(Boolean).join(' ')}>
-      <Link href={href} className={classes.mediaWrapper}>
-        {!metaImage && <div className={classes.placeholder}>No image</div>}
-        {metaImage && typeof metaImage !== 'string' && (
+    <Link href={href} className={[classes.card, className].filter(Boolean).join(' ')}>
+      <div className={classes.mediaWrapper}>
+        {!metaImage && <div className={classes.placeholder}>Sem imagem</div>}
+        {metaImage && typeof metaImage !== 'number' && (
           <Media imgClassName={classes.image} resource={metaImage} fill />
         )}
-      </Link>
+      </div>
+
       <div className={classes.content}>
-        {showCategories && hasCategories && (
-          <div className={classes.leader}>
-            {showCategories && hasCategories && (
-              <div>
-                {categories?.map((category, index) => {
-                  if (typeof category === 'object' && category !== null) {
-                    const { title: titleFromCategory } = category
-
-                    const categoryTitle = titleFromCategory || 'Untitled category'
-
-                    const isLast = index === categories.length - 1
-
-                    return (
-                      <Fragment key={index}>
-                        {categoryTitle}
-                        {!isLast && <Fragment>, &nbsp;</Fragment>}
-                      </Fragment>
-                    )
-                  }
-
-                  return null
-                })}
-              </div>
-            )}
-          </div>
-        )}
-        {titleToUse && (
-          <h4 className={classes.title}>
-            <Link href={href} className={classes.titleLink}>
-              {titleToUse}
-            </Link>
-          </h4>
-        )}
+        {titleToUse && <h4 className={classes.title}>{titleToUse}</h4>}
         {description && (
           <div className={classes.body}>
             {description && <p className={classes.description}>{sanitizedDescription}</p>}
@@ -115,6 +84,6 @@ export const Card: React.FC<{
         )}
         {doc && <Price product={doc} />}
       </div>
-    </div>
+    </Link>
   )
 }

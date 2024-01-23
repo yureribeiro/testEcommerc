@@ -9,7 +9,7 @@ import { Gutter } from '../Gutter'
 
 import classes from './index.module.scss'
 
-const Title: React.FC = () => <span>Dashboard</span>
+const Title: React.FC = () => <span>Painel de controle</span>
 
 export const AdminBar: React.FC<{
   adminBarProps?: PayloadAdminBarProps

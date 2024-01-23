@@ -19,17 +19,16 @@ export const priceFromJSON = (priceJSON: string, quantity: number = 1, raw?: boo
 
       if (raw) return priceValue.toString()
 
-      price = (priceValue / 100).toLocaleString('en-US', {
+      price = (priceValue / 100).toLocaleString('pt-BR', {
         style: 'currency',
-        currency: 'USD', // TODO: use `parsed.currency`
+        currency: 'brl', // TODO: use `parsed.currency`
       })
 
       if (priceType === 'recurring') {
-        price += `/${
-          parsed.recurring.interval_count > 1
-            ? `${parsed.recurring.interval_count} ${parsed.recurring.interval}`
-            : parsed.recurring.interval
-        }`
+        price += `/${parsed.recurring.interval_count > 1
+          ? `${parsed.recurring.interval_count} ${parsed.recurring.interval}`
+          : parsed.recurring.interval
+          }`
       }
     } catch (e) {
       console.error(`Cannot parse priceJSON`) // eslint-disable-line no-console
@@ -72,7 +71,7 @@ export const Price: React.FC<{
         </div>
       )}
       {button && button === 'addToCart' && (
-        <AddToCartButton product={product} appearance="default" />
+        <AddToCartButton product={product} appearance="primary" />
       )}
       {button && button === 'removeFromCart' && <RemoveFromCartButton product={product} />}
     </div>

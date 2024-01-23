@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
 
 import { Product } from '../../../payload/payload-types'
 import { useCart } from '../../_providers/Cart'
@@ -30,13 +30,13 @@ export const AddToCartButton: React.FC<{
     <Button
       href={isInCart ? '/cart' : undefined}
       type={!isInCart ? 'button' : undefined}
-      label={isInCart ? `✓ View in cart` : `Add to cart`}
+      label={isInCart ? `✓ Ver carrinho` : `Adicionar`}
       el={isInCart ? 'link' : undefined}
       appearance={appearance}
       className={[
         className,
         classes.addToCartButton,
-        appearance === 'default' && isInCart && classes.green,
+        appearance === 'primary' && isInCart && classes.green,
         !hasInitializedCart && classes.hidden,
       ]
         .filter(Boolean)
@@ -44,13 +44,13 @@ export const AddToCartButton: React.FC<{
       onClick={
         !isInCart
           ? () => {
-              addItemToCart({
-                product,
-                quantity,
-              })
+            addItemToCart({
+              product,
+              quantity,
+            })
 
-              router.push('/cart')
-            }
+            router.push('/cart')
+          }
           : undefined
       }
     />

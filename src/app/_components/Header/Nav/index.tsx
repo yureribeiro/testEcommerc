@@ -38,7 +38,6 @@ export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
           window.location.href = '/login'
         }}
       />}
-      {user && <CartLink />}
     </nav>
   )
 }
