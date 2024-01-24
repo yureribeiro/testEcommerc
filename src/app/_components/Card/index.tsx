@@ -11,7 +11,6 @@ import classes from './index.module.scss'
 
 const priceFromJSON = (priceJSON): string => {
   let price = ''
-  console.log('priceJSON: ', priceJSON, "type:" + typeof priceJSON)
 
   if (priceJSON) {
     try {
@@ -51,7 +50,7 @@ export const Card: React.FC<{
   } = props
 
   const { description, image: metaImage } = meta || {}
-  console.log(description)
+
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
   const titleToUse = titleFromProps || title
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
